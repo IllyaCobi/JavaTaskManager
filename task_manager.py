@@ -48,7 +48,7 @@ class TaskManager:
     def add_task(self):
         title = input("Enter task title: ").strip()
         while not title:
-            title = input("Title cannot be empty. Enter task title: ").strip()
+            title = input("Error: Title cannot be empty. Please enter task title: ").strip()
 
         description = input("Enter task description: ").strip()
 
@@ -58,17 +58,17 @@ class TaskManager:
                 datetime.strptime(due_date, "%Y-%m-%d")
                 break
             except ValueError:
-                print("Invalid date format. Please use YYYY-MM-DD.")
+                print("Error: Invalid date format. Please use YYYY-MM-DD.")
 
         while True:
             try:
-                priority = int(input("Enter task priority (1-5): ").strip())
-                if 1 <= priority <= 5:
+                priority = int(input(f"Enter task priority ({PRIORITY_MIN}-{PRIORITY_MAX}): ").strip())
+                if PRIORITY_MIN <= priority <= PRIORITY_MAX:
                     break
                 else:
-                    print("Priority must be between 1 and 5.")
+                    print(f"Error: Priority must be between {PRIORITY_MIN} and {PRIORITY_MAX}.")
             except ValueError:
-                print("Please enter a valid number between 1 and 5.")
+                print("Error: Please enter a valid number for priority.")
 
         task = Task(title, description, due_date, priority)
         self.tasks.append(task)
