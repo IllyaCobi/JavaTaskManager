@@ -97,6 +97,32 @@ class TaskManager:
         except ValueError:
             print("Error: Please enter a valid number.")
 
+    def save_tasks(self, filename=TASKS_FILE):
+        """Зберігає список завдань у JSON-файл."""
+        data_to_save = [task.to_dict() for task in self.tasks]
+        try:
+            with open(filename, 'w', encoding='utf-8') as f: # Додано encoding='utf-8'
+                json.dump(data_to_save, f, indent=4) # indent=4 для красивого форматування JSON
+            print(f"Tasks saved to {filename}")
+        except IOError as e:
+            print(f"Error saving tasks to {filename}: {e}")
+
+    def load_tasks(self, filename=TASKS_FILE):
+        """Завантажує список завдань з JSON-файлу."""
+        try:
+            with open(filename, 'r', encoding='utf-8') as f: # Додано encoding='utf-8'
+                data = json.load(f)
+                self.tasks = [Task(**item) for item in data] # **item розпаковує словник в аргументи конструктора
+            print(f"Tasks loaded from {filename}")
+        except FileNotFoundError:
+            print(f"No save file '{filename}' found. Starting with empty tasks.")
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON from {filename}: {e}. File might be corrupted.")
+            self.tasks = [] # Очищаємо список, якщо файл пошкоджений
+        except Exception as e:
+            print(f"An unexpected error occurred while loading tasks from {filename}: {e}")
+            self.tasks = []
+
     def remove_task(self):
         self.list_tasks()
         if not self.tasks:
