@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 
-# Додаємо константи для опцій меню та назви файлу
+
 TASKS_FILE = 'tasks.json'
 
 MENU_OPTION_ADD = 1
@@ -23,7 +23,7 @@ class Task:
     def __init__(self, title, description, due_date, priority, completed=False):
         self.title = title
         self.description = description
-        self.due_date = due_date  # Зберігається як рядок YYYY-MM-DD
+        self.due_date = due_date  
         self.priority = priority
         self.completed = completed
 
@@ -43,7 +43,7 @@ class Task:
 class TaskManager:
     def __init__(self):
         self.tasks = []
-        self.load_tasks(TASKS_FILE) # Автоматичне завантаження при старті
+        self.load_tasks(TASKS_FILE) 
 
     def add_task(self):
         title = input("Enter task title: ").strip()
@@ -81,7 +81,7 @@ class TaskManager:
         print(f"{'Index':<6} {'Title':<20} {'Due Date':<12} {'Priority':<8} {'Status':<10} {'Description (partial)':<30}")
         print("=" * 87) # Збільшуємо ширину роздільника
         for idx, task in enumerate(self.tasks, 1):
-            print(f"{idx:<6} {task}") # Використовуємо __str__ метод Task
+            print(f"{idx:<6} {task}") 
 
     def mark_task_as_completed(self):
         self.list_tasks()
@@ -164,7 +164,7 @@ class TaskManager:
             while True:
                 new_due_date = input(f"Enter new due date (YYYY-MM-DD, current: {task_to_update.due_date}): ").strip()
                 if not new_due_date:
-                    break # Користувач залишив пустим, не змінюємо
+                    break 
                 try:
                     datetime.strptime(new_due_date, "%Y-%m-%d")
                     task_to_update.due_date = new_due_date
@@ -175,7 +175,7 @@ class TaskManager:
             while True:
                 new_priority_str = input(f"Enter new priority ({PRIORITY_MIN}-{PRIORITY_MAX}, current: {task_to_update.priority}): ").strip()
                 if not new_priority_str:
-                    break # Користувач залишив пустим, не змінюємо
+                    break 
                 try:
                     new_priority = int(new_priority_str)
                     if PRIORITY_MIN <= new_priority <= PRIORITY_MAX:
@@ -232,7 +232,7 @@ class TaskManager:
         print("1. Title")
         print("2. Due Date")
         print("3. Priority")
-        print("4. Status (Completed First)") # Додано сортування за статусом
+        print("4. Status (Completed First)")
         try:
             choice = int(input("Enter your choice: ").strip())
             if choice == 1:
