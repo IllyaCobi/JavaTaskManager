@@ -96,6 +96,21 @@ class TaskManager:
                 print("Error: Invalid task index.")
         except ValueError:
             print("Error: Please enter a valid number.")
+            
+    def remove_task(self):
+        self.list_tasks()
+        if not self.tasks:
+            return
+
+        try:
+            index = int(input("Enter the task index to remove: ")) - 1
+            if 0 <= index < len(self.tasks):
+                removed_task = self.tasks.pop(index)
+                print(f"Task '{removed_task.title}' removed successfully.")
+            else:
+                print("Error: Invalid task index.")
+        except ValueError:
+            print("Error: Please enter a valid number.")
 
     def update_task(self):
         self.list_tasks()
