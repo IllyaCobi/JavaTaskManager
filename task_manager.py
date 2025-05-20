@@ -198,10 +198,15 @@ class TaskManager:
         print()
 
     def sort_tasks(self):
+        if not self.tasks:
+            print("No tasks to sort.")
+            return
+
         print("\nSort Tasks By:")
         print("1. Title")
         print("2. Due Date")
         print("3. Priority")
+        print("4. Status (Completed First)") # Додано сортування за статусом
         try:
             choice = int(input("Enter your choice: ").strip())
             if choice == 1:
@@ -213,10 +218,13 @@ class TaskManager:
             elif choice == 3:
                 self.tasks.sort(key=lambda task: task.priority)
                 print("Tasks sorted by priority.")
+            elif choice == 4:
+                self.tasks.sort(key=lambda task: (not task.completed, task.title.lower())) # completed=False (Pending) йдуть першими
+                print("Tasks sorted by status (completed tasks at the end).")
             else:
                 print("Invalid choice. Sorting canceled.")
         except ValueError:
-            print("Please enter a valid number.")
+            print("Error: Please enter a valid number.")
 
 
 def display_menu():
