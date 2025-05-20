@@ -1,16 +1,34 @@
 import json
 from datetime import datetime, timedelta
 
+# Додаємо константи для опцій меню та назви файлу
+TASKS_FILE = 'tasks.json'
+
+MENU_OPTION_ADD = 1
+MENU_OPTION_LIST = 2
+MENU_OPTION_REMOVE = 3
+MENU_OPTION_UPDATE = 4
+MENU_OPTION_SEARCH = 5
+MENU_OPTION_MARK_COMPLETED = 6
+MENU_OPTION_CHECK_DEADLINES = 7
+MENU_OPTION_SORT = 8
+MENU_OPTION_SAVE = 9
+MENU_OPTION_LOAD = 10
+MENU_OPTION_EXIT = 11
+
+PRIORITY_MIN = 1
+PRIORITY_MAX = 5
 
 class Task:
     def __init__(self, title, description, due_date, priority, completed=False):
         self.title = title
         self.description = description
-        self.due_date = due_date
+        self.due_date = due_date  # Зберігається як рядок YYYY-MM-DD
         self.priority = priority
         self.completed = completed
 
     def to_dict(self):
+        """Конвертує об'єкт Task у словник для збереження в JSON."""
         return {
             "title": self.title,
             "description": self.description,
