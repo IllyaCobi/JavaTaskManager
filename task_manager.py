@@ -249,23 +249,34 @@ def main():
         display_menu()
         try:
             choice = int(input("Enter your choice: "))
-            if choice == 1:
+            if choice == MENU_OPTION_ADD:
                 manager.add_task()
-            elif choice == 2:
+            elif choice == MENU_OPTION_LIST:
                 manager.list_tasks()
-            elif choice == 6:
+            elif choice == MENU_OPTION_REMOVE:
+                manager.remove_task()
+            elif choice == MENU_OPTION_UPDATE:
+                manager.update_task()
+            elif choice == MENU_OPTION_SEARCH:
+                manager.search_task()
+            elif choice == MENU_OPTION_MARK_COMPLETED:
                 manager.mark_task_as_completed()
-            elif choice == 7:
+            elif choice == MENU_OPTION_CHECK_DEADLINES:
                 manager.check_deadlines()
-            elif choice == 8:
+            elif choice == MENU_OPTION_SORT:
                 manager.sort_tasks()
-            elif choice == 11:
-                print("Exiting Task Manager.")
+            elif choice == MENU_OPTION_SAVE:
+                manager.save_tasks()
+            elif choice == MENU_OPTION_LOAD:
+                manager.load_tasks()
+            elif choice == MENU_OPTION_EXIT:
+                manager.save_tasks() 
+                print("Exiting Task Manager. Goodbye!")
                 break
             else:
-                print("Invalid choice. Try again.")
+                print("Error: Invalid choice. Please try again.")
         except ValueError:
-            print("Please enter a valid number.")
+            print("Error: Please enter a valid number.")
 
 
 if __name__ == "__main__":
