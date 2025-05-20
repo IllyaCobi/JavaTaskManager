@@ -41,6 +41,7 @@ class Task:
 class TaskManager:
     def __init__(self):
         self.tasks = []
+        self.load_tasks(TASKS_FILE) # Автоматичне завантаження при старті
 
     def add_task(self):
         title = input("Enter task title: ").strip()
