@@ -97,6 +97,59 @@ class TaskManager:
         except ValueError:
             print("Error: Please enter a valid number.")
 
+    def update_task(self):
+        self.list_tasks()
+        if not self.tasks:
+            return
+
+        try:
+            index = int(input("Enter the task index to update: ")) - 1
+            if not (0 <= index < len(self.tasks)):
+                print("Error: Invalid task index.")
+                return
+
+            task_to_update = self.tasks[index]
+            print(f"Currently updating task: '{task_to_update.title}'")
+            print("Leave field empty to keep current value.")
+
+            new_title = input(f"Enter new title (current: {task_to_update.title}): ").strip()
+            if new_title:
+                task_to_update.title = new_title
+
+            new_description = input(f"Enter new description (current: {task_to_update.description}): ").strip()
+            if new_description:
+                task_to_update.description = new_description
+
+            while True:
+                new_due_date = input(f"Enter new due date (YYYY-MM-DD, current: {task_to_update.due_date}): ").strip()
+                if not new_due_date:
+                    break # Користувач залишив пустим, не змінюємо
+                try:
+                    datetime.strptime(new_due_date, "%Y-%m-%d")
+                    task_to_update.due_date = new_due_date
+                    break
+                except ValueError:
+                    print("Error: Invalid date format. Please use YYYY-MM-DD.")
+
+            while True:
+                new_priority_str = input(f"Enter new priority ({PRIORITY_MIN}-{PRIORITY_MAX}, current: {task_to_update.priority}): ").strip()
+                if not new_priority_str:
+                    break # Користувач залишив пустим, не змінюємо
+                try:
+                    new_priority = int(new_priority_str)
+                    if PRIORITY_MIN <= new_priority <= PRIORITY_MAX:
+                        task_to_update.priority = new_priority
+                        break
+                    else:
+                        print(f"Error: Priority must be between {PRIORITY_MIN} and {PRIORITY_MAX}.")
+                except ValueError:
+                    print("Error: Please enter a valid number for priority.")
+
+            print(f"Task '{task_to_update.title}' updated successfully.")
+
+        except ValueError:
+            print("Error: Please enter a valid number for the index.")
+
     def check_deadlines(self):
         today = datetime.now()
         print("\nTask Deadlines:")
