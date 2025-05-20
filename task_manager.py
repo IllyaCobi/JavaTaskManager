@@ -96,7 +96,7 @@ class TaskManager:
                 print("Error: Invalid task index.")
         except ValueError:
             print("Error: Please enter a valid number.")
-            
+
     def remove_task(self):
         self.list_tasks()
         if not self.tasks:
@@ -164,6 +164,27 @@ class TaskManager:
 
         except ValueError:
             print("Error: Please enter a valid number for the index.")
+
+    def search_task(self):
+        search_term = input("Enter keyword to search for (title or description): ").strip().lower()
+        if not search_term:
+            print("Search term cannot be empty.")
+            return
+
+        found_tasks = []
+        for task in self.tasks:
+            if search_term in task.title.lower() or search_term in task.description.lower():
+                found_tasks.append(task)
+
+        if not found_tasks:
+            print(f"No tasks found matching '{search_term}'.")
+            return
+
+        print("\n--- Found Tasks ---")
+        print(f"{'Index':<6} {'Title':<20} {'Due Date':<12} {'Priority':<8} {'Status':<10} {'Description (partial)':<30}")
+        print("=" * 87)
+        for idx, task in enumerate(found_tasks, 1):
+            print(f"{idx:<6} {task}") # Використовуємо __str__ метод Task
 
     def check_deadlines(self):
         today = datetime.now()
