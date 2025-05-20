@@ -78,23 +78,24 @@ class TaskManager:
         if not self.tasks:
             print("No tasks available.")
             return
-        print(f"{'Index':<6} {'Title':<20} {'Due Date':<12} {'Priority':<8} {'Status':<10}")
-        print("=" * 60)
+        print(f"{'Index':<6} {'Title':<20} {'Due Date':<12} {'Priority':<8} {'Status':<10} {'Description (partial)':<30}")
+        print("=" * 87) # Збільшуємо ширину роздільника
         for idx, task in enumerate(self.tasks, 1):
-            status = "Completed" if task.completed else "Pending"
-            print(f"{idx:<6} {task.title:<20} {task.due_date:<12} {task.priority:<8} {status:<10}")
+            print(f"{idx:<6} {task}") # Використовуємо __str__ метод Task
 
     def mark_task_as_completed(self):
         self.list_tasks()
+        if not self.tasks: # Додано перевірку, якщо немає завдань для позначки
+            return
         try:
             index = int(input("Enter the task index to mark as completed: ")) - 1
             if 0 <= index < len(self.tasks):
                 self.tasks[index].completed = True
                 print(f"Task '{self.tasks[index].title}' marked as completed.")
             else:
-                print("Invalid task index.")
+                print("Error: Invalid task index.")
         except ValueError:
-            print("Please enter a valid number.")
+            print("Error: Please enter a valid number.")
 
     def check_deadlines(self):
         today = datetime.now()
