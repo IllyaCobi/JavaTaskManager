@@ -36,8 +36,10 @@ class Task:
             "priority": self.priority,
             "completed": self.completed,
         }
-
-
+    def __str__(self):
+        """Повертає форматований рядок для відображення завдання."""
+        status = "Completed" if self.completed else "Pending"
+        return f"{self.title:<20} {self.due_date:<12} {self.priority:<8} {status:<10} {self.description[:25]:<27}..." if len(self.description) > 25 else f"{self.description:<30}"
 class TaskManager:
     def __init__(self):
         self.tasks = []
