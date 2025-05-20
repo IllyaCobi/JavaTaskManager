@@ -220,18 +220,19 @@ class TaskManager:
 
 
 def display_menu():
-    print("\nTask Manager Menu:")
-    print("1. Add Task")
-    print("2. List Tasks")
-    print("3. Remove Task")
-    print("4. Update Task")
-    print("5. Search Task")
-    print("6. Mark Task as Completed")
-    print("7. Check Deadlines")
-    print("8. Sort Tasks")
-    print("9. Save Tasks")
-    print("10. Load Tasks")
-    print("11. Exit")
+    print("\n--- Task Manager Menu ---")
+   
+    print(f"{MENU_OPTION_ADD}. Add Task")
+    print(f"{MENU_OPTION_LIST}. List Tasks")
+    print(f"{MENU_OPTION_REMOVE}. Remove Task")
+    print(f"{MENU_OPTION_UPDATE}. Update Task")
+    print(f"{MENU_OPTION_SEARCH}. Search Task")
+    print(f"{MENU_OPTION_MARK_COMPLETED}. Mark Task as Completed")
+    print(f"{MENU_OPTION_CHECK_DEADLINES}. Check Deadlines")
+    print(f"{MENU_OPTION_SORT}. Sort Tasks")
+    print(f"{MENU_OPTION_SAVE}. Save Tasks")
+    print(f"{MENU_OPTION_LOAD}. Load Tasks")
+    print(f"{MENU_OPTION_EXIT}. Exit")
 
 
 def main():
